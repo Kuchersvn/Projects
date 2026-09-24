@@ -8,7 +8,8 @@ const testProjects = [
 
 let projects = testProjects;
 
-const listEl = document.getElementById("list");
+const listEl   = document.getElementById("list");
+const searchEl = document.getElementById("search");
 
 function render(items) {
   listEl.innerHTML = "";
@@ -25,5 +26,18 @@ function render(items) {
     listEl.appendChild(li);
   });
 }
+
+function filter(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return projects;
+  return projects.filter(p =>
+    p.title.toLowerCase().includes(q) ||
+    p.description.toLowerCase().includes(q)
+  );
+}
+
+searchEl.addEventListener("input", () => {
+  render(filter(searchEl.value));
+});
 
 render(projects);
