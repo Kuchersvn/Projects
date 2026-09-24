@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Проекты</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Проекты</h1>
+
+    <input
+      type="text"
+      id="search"
+      class="search"
+      placeholder="Поиск по названию или описанию..."
+    >
+
+    <form id="form" class="form">
+      <input
+        type="text"
+        id="title"
+        class="form__input"
+        placeholder="Название проекта"
+        required
+      >
+      <input
+        type="text"
+        id="description"
+        class="form__input"
+        placeholder="Описание"
+        required
+      >
+      <button type="submit" class="form__btn">Добавить</button>
+    </form>
+
+    <ul id="list" class="list"></ul>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
