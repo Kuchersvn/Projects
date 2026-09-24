@@ -11,6 +11,7 @@ const testProjects = [
 let projects = load();
 
 const listEl   = document.getElementById("list");
+const emptyEl  = document.getElementById("empty");
 const searchEl = document.getElementById("search");
 const formEl   = document.getElementById("form");
 const titleEl  = document.getElementById("title");
@@ -31,6 +32,12 @@ function save() {
 
 function render(items) {
   listEl.innerHTML = "";
+
+  if (items.length === 0) {
+    emptyEl.hidden = false;
+    return;
+  }
+  emptyEl.hidden = true;
 
   items.forEach(p => {
     const li = document.createElement("li");

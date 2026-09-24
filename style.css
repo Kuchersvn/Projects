@@ -88,3 +88,9 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+.empty {
+  text-align: center;
+  color: #888;
+  margin-top: 24px;
+}
