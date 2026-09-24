@@ -17,10 +17,27 @@ const formEl   = document.getElementById("form");
 const titleEl  = document.getElementById("title");
 const descEl   = document.getElementById("description");
 
+function isValidProject(p) {
+  return (
+    p &&
+    typeof p === "object" &&
+    typeof p.title === "string" &&
+    p.title.trim() !== "" &&
+    typeof p.description === "string" &&
+    p.description.trim() !== ""
+  );
+}
+
 function load() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : testProjects;
+    if (!raw) return testProjects;
+
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return testProjects;
+
+    const clean = parsed.filter(isValidProject);
+    return clean.length > 0 ? clean : testProjects;
   } catch {
     return testProjects;
   }
