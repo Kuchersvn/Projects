@@ -10,6 +10,9 @@ let projects = testProjects;
 
 const listEl   = document.getElementById("list");
 const searchEl = document.getElementById("search");
+const formEl   = document.getElementById("form");
+const titleEl  = document.getElementById("title");
+const descEl   = document.getElementById("description");
 
 function render(items) {
   listEl.innerHTML = "";
@@ -38,6 +41,28 @@ function filter(query) {
 
 searchEl.addEventListener("input", () => {
   render(filter(searchEl.value));
+});
+
+formEl.addEventListener("submit", e => {
+  e.preventDefault();
+
+  const title = titleEl.value.trim();
+  const description = descEl.value.trim();
+  if (!title || !description) return;
+
+  const newProject = {
+    id: Date.now(),
+    title,
+    description
+  };
+
+  projects.push(newProject);
+
+  titleEl.value = "";
+  descEl.value = "";
+  searchEl.value = "";
+
+  render(projects);
 });
 
 render(projects);
