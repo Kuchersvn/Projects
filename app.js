@@ -1,3 +1,5 @@
+const STORAGE_KEY = "projects";
+
 const testProjects = [
   { id: 1, title: "Интернет-магазин", description: "Пет-проект на React" },
   { id: 2, title: "Telegram-бот",     description: "Бот для напоминаний" },
@@ -6,13 +8,26 @@ const testProjects = [
   { id: 5, title: "Игра «Змейка»",    description: "Canvas + JavaScript" }
 ];
 
-let projects = testProjects;
+let projects = load();
 
 const listEl   = document.getElementById("list");
 const searchEl = document.getElementById("search");
 const formEl   = document.getElementById("form");
 const titleEl  = document.getElementById("title");
 const descEl   = document.getElementById("description");
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : testProjects;
+  } catch {
+    return testProjects;
+  }
+}
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+}
 
 function render(items) {
   listEl.innerHTML = "";
@@ -57,6 +72,7 @@ formEl.addEventListener("submit", e => {
   };
 
   projects.push(newProject);
+  save();
 
   titleEl.value = "";
   descEl.value = "";
